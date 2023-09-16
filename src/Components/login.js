@@ -37,15 +37,20 @@ export default function Login() {
     );
     const cartData = await response.json();
     setCartData(cartData.data);
-    setProductCount(cartData.data.totalItem);
-    const productIds = [];
-    let totalCartAmount = 0;
-    cartData.data.items.map((data) => {
-      productIds.push(data.productId);
-      totalCartAmount = totalCartAmount + data.price;
-    });
-    setTotalCartPrice(totalCartAmount);
-    setCartProductId(productIds);
+    if(cartData.data == null){
+      setProductCount(0);
+    }else{
+      setProductCount(cartData.data.totalItem);
+      const productIds = [];
+      let totalCartAmount = 0;
+      cartData.data.items.map((data) => {
+        productIds.push(data.productId);
+        totalCartAmount = totalCartAmount + data.price;
+      });
+      setTotalCartPrice(totalCartAmount);
+      setCartProductId(productIds);
+    }
+   
   };
   const { values, handleChange, handleSubmit, handleBlur, errors, touched } =
     useFormik({
@@ -130,7 +135,7 @@ export default function Login() {
               )}
               <button type="submit">Next</button>
               <div className="text-center pt-2">
-                Not registered yet?<Link to={"/home"}> SignUp</Link>
+                Not registered yet?<Link to={"/signup"}> SignUp</Link>
               </div>
               <div className="d-flex justify-content-center">
                 <div className="demo">

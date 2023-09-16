@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import BaseApp from "../BaseApp/baseApp";
 import { AppState } from "../Context/AppProvider";
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 
 export default function Home() {
   const {
@@ -34,16 +36,23 @@ export default function Home() {
           `https://ecommerce-8rwm.onrender.com/cart/get/${userId}`
         );
         const cartData = await response2.json();
+        console.log("cartData",cartData)
         setCartData(cartData.data);
-        setProductCount(cartData.data.totalItem);
-        const productIds = [];
-        let totalCartAmount = 0;
-        cartData.data.items.map((data) => {
-          productIds.push(data.productId);
-          totalCartAmount = totalCartAmount + data.price;
-        });
-        setTotalCartPrice(totalCartAmount);
-        setCartProductId(productIds);
+        if(cartData.data == null){
+          setProductCount(0);
+        }else{
+          setProductCount(cartData.data.totalItem);
+          const productIds = [];
+          let totalCartAmount = 0;
+          cartData.data.items.map((data) => {
+            productIds.push(data.productId);
+            totalCartAmount = totalCartAmount + data.price;
+          });
+          setTotalCartPrice(totalCartAmount);
+          setCartProductId(productIds);
+        }
+        
+       
       }
     };
     getData();
@@ -51,6 +60,9 @@ export default function Home() {
   return (
     <BaseApp banner={true} footer={true}>
       <div className="product-container">
+        {product == null ? <Box className="pt-5" sx={{ display: 'flex' }}>
+      <CircularProgress />
+    </Box> : ""}
         {product &&
           product.map((data, index) => {
             return (

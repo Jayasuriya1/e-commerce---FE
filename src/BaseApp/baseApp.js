@@ -22,6 +22,8 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 
 export default function BaseApp({ children, banner, footer }) {
   const {
+    product,
+    setProduct,
     setCartData,
     setTotalCartPrice,
     setProductCount,
@@ -38,6 +40,34 @@ export default function BaseApp({ children, banner, footer }) {
     setCartData(null);
     navigate("/home");
   };
+  function electronicsFilter(){
+    console.log("productData",product)
+    const productFilter = product.filter((data)=>{
+      return data.category == "electronics"
+    })
+    console.log("electronicsFilter",productFilter)
+    setProduct(productFilter)
+  }
+
+  function bookFilter(){
+    console.log("productData",product)
+    const productFilter = product.filter((data)=>{
+      return data.category == "books"
+    })
+    console.log("electronicsFilter",productFilter)
+    setProduct(productFilter)
+  }
+
+  function clothFilter(){
+    console.log("productData",product)
+    const productFilter = product.filter((data)=>{
+      return data.category == "clothing"
+    })
+    console.log("electronicsFilter",productFilter)
+    setProduct(productFilter)
+  }
+
+
   return (
     <div className="base-container">
       <Navbar bg="light" className="sticky-top" expand="lg">
@@ -50,17 +80,17 @@ export default function BaseApp({ children, banner, footer }) {
             <Nav className="me-auto">
               <Nav.Link onClick={() => navigate("/home")}>Home</Nav.Link>
 
-              <NavDropdown title="Categories" id="basic-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">
+              {/* <NavDropdown title="Categories" id="basic-nav-dropdown">
+                <NavDropdown.Item onClick={()=>electronicsFilter()}>
                   Electronics
                 </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">Clothing</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">Books</NavDropdown.Item>
+                <NavDropdown.Item onClick={()=>clothFilter()}>Clothing</NavDropdown.Item>
+                <NavDropdown.Item onClick={()=>bookFilter()}>Books</NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item href="#action/3.4">
                   Separated link
                 </NavDropdown.Item>
-              </NavDropdown>
+              </NavDropdown> */}
             </Nav>
           </Navbar.Collapse>
           {localStorage.getItem("cUserId") &&
