@@ -63,7 +63,7 @@ export default function SignUp(){
           handleOpen();
           await localStorage.removeItem("cUserId");
           await localStorage.removeItem("cUserToken");
-          const response = await fetch("http://localhost:7004/user/signup", {
+          const response = await fetch("https://ecommerce-8rwm.onrender.com/user/signup", {
             method: "POST",
             body: JSON.stringify(data),
             headers: {
