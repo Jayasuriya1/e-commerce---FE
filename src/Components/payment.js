@@ -23,13 +23,11 @@ export default function Payment() {
 
   const deleteAllCartData = async () => {
     const userId = localStorage.getItem("cUserId");
-    console.log("payment userId", userId);
     const response = await fetch(
       `https://ecommerce-8rwm.onrender.com/cart/delete/all/${userId}`,
       { method: "DELETE" }
     );
     const cartDatas = await response.json();
-    console.log("cartDataDelete",cartDatas)
     setCartProductId([]);
     setProductCount(0);
     setTotalCartPrice(0);

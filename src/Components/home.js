@@ -36,7 +36,6 @@ export default function Home() {
           `https://ecommerce-8rwm.onrender.com/cart/get/${userId}`
         );
         const cartData = await response2.json();
-        console.log("cartData",cartData)
         setCartData(cartData.data);
         if(cartData.data == null){
           setProductCount(0);
@@ -51,8 +50,6 @@ export default function Home() {
           setTotalCartPrice(totalCartAmount);
           setCartProductId(productIds);
         }
-        
-       
       }
     };
     getData();

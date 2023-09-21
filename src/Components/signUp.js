@@ -8,7 +8,6 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
-import Button from "@mui/material/Button";
 import { AppState } from "../Context/AppProvider";
 
 
@@ -58,7 +57,6 @@ export default function SignUp(){
       },
       validationSchema: userSchemaValidation,
       onSubmit: async (data) => {
-        console.log("inputData",data)
         try {
           handleOpen();
           await localStorage.removeItem("cUserId");
@@ -72,9 +70,6 @@ export default function SignUp(){
           });
           const result = await response.json();
           if (result.success == true) {
-            // localStorage.setItem("cUserToken", result.token);
-            // localStorage.setItem("cUserId", result.id);
-            // updateCartData();
             toast.success(result.message);
             navigate("/login");
           }
@@ -95,16 +90,12 @@ export default function SignUp(){
           <div className="row">
             <div className="col-4 login-side-1">
               <h1>Looks like you're new here!</h1>
-              {/* <p>Get access to your</p>
-              <p>Orders, Wishlist and</p>
-              <p>Good Deals</p> */}
-              <img className="img-fluid" src="./login-img.png"></img>
+               <img className="img-fluid" src="./login-img.png"></img>
             </div>
             <form onSubmit={handleSubmit} className="col-8 login-side-2">
             <Form.Group className="mb-3" controlId="formGroupEmail">
                 <Form.Label>Name</Form.Label>
                 <Form.Control
-                //   type="email"
                   value={values.name}
                   name="name"
                   onBlur={handleBlur}
@@ -156,13 +147,6 @@ export default function SignUp(){
               <div className="text-center pt-2">
               Already have an account?<Link to={"/login"}> Log In</Link>
               </div>
-              {/* <div className="d-flex justify-content-center">
-                <div className="demo">
-                  <p>For Demo:</p>
-                  <p>Email: jayasuriya@gmail.com</p>
-                  <p>password: admin@123</p>
-                </div>
-              </div> */}
             </form>
           </div>
         </div>

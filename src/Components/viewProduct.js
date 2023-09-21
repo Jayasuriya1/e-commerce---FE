@@ -3,7 +3,6 @@ import { useNavigate, useParams } from "react-router";
 import BaseApp from "../BaseApp/baseApp";
 import { AppState } from "../Context/AppProvider";
 import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import { toast } from "react-toastify";
@@ -78,7 +77,6 @@ export default function ViewProduct() {
           body: JSON.stringify({}),
           headers: {
             "Content-Type": "application/json",
-            //   Authorization: `Bearer ${token}`
           },
         }
       );
